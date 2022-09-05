@@ -1,4 +1,4 @@
-package com.tokiomarine.transferencias.domain;
+package com.tokiomarine.transferencias.domain.transfer;
 
 import com.tokiomarine.transferencias.domain.fee.*;
 
@@ -6,12 +6,12 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
 public class Transfer {
-    private final String originAccount;
-    private final String destinationAccount;
-    private final BigDecimal value;
+    private String originAccount;
+    private String destinationAccount;
+    private BigDecimal value;
     private BigDecimal fee;
-    private final LocalDate requestedDate;
-    private final LocalDate scheduledDate;
+    private LocalDate requestedDate;
+    private LocalDate scheduledDate;
 
     public Transfer(String originAccount, String destinationAccount, BigDecimal value, LocalDate requestedDate, LocalDate scheduledDate) {
         this.originAccount = originAccount;
@@ -20,10 +20,6 @@ public class Transfer {
         this.requestedDate = requestedDate;
         this.scheduledDate = scheduledDate;
         calculateFee();
-    }
-
-    public BigDecimal getFee() {
-        return fee;
     }
 
     private void calculateFee() {
@@ -55,5 +51,29 @@ public class Transfer {
         if(this.fee == null) {
             throw new NoFeeAvaliableException("Não existe taxa aplicável.");
         }
+    }
+
+    public String getOriginAccount() {
+        return originAccount;
+    }
+
+    public String getDestinationAccount() {
+        return destinationAccount;
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    public BigDecimal getFee() {
+        return fee;
+    }
+
+    public LocalDate getRequestedDate() {
+        return requestedDate;
+    }
+
+    public LocalDate getScheduledDate() {
+        return scheduledDate;
     }
 }

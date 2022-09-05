@@ -1,7 +1,7 @@
 package com.tokiomarine.transferencias;
 
 
-import com.tokiomarine.transferencias.domain.Transfer;
+import com.tokiomarine.transferencias.domain.transfer.Transfer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
