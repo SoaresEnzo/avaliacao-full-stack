@@ -1,12 +1,14 @@
 package com.tokiomarine.transferencias.domain.transfer.ports;
 
-import com.tokiomarine.transferencias.domain.transfer.dtos.TransferRespondeBodyDTO;
-
-import java.util.List;
+import com.tokiomarine.transferencias.domain.transfer.dtos.TransferRequestBodyDTO;
+import com.tokiomarine.transferencias.domain.transfer.dtos.TransferResponseBodyDTO;
+import com.tokiomarine.transferencias.infrastructure.entities.TransferEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface TransferServicePort {
 
-    List<TransferRespondeBodyDTO> findTransfers();
+    Page<TransferResponseBodyDTO> findTransfers(Pageable page);
 
-    void saveTransfer();
+    TransferEntity saveTransfer(TransferRequestBodyDTO request);
 }

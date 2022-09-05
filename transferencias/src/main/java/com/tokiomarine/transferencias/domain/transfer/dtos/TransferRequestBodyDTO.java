@@ -1,28 +1,28 @@
 package com.tokiomarine.transferencias.domain.transfer.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tokiomarine.transferencias.domain.transfer.Transfer;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TransferRequestBodyDTO {
+    private String originAccount;
+    private String destinationAccount;
+    private BigDecimal value;
+    private LocalDate requestedDate;
+    private LocalDate scheduledDate;
 
-    private final String originAccount;
-    private final String destinationAccount;
-    private final BigDecimal value;
-    private BigDecimal fee;
-    private final LocalDate requestedDate;
-    private final LocalDate scheduledDate;
-
-    private final BigDecimal finalValue;
-
-    public TransferRequestBodyDTO(Transfer transfer) {
-        this.originAccount = transfer.getOriginAccount();
-        this.destinationAccount = transfer.getDestinationAccount();
-        this.value = transfer.getFee();
-        this.fee = transfer.getFee();
-        this.requestedDate = transfer.getRequestedDate();
-        this.scheduledDate = transfer.getScheduledDate();
-        this.finalValue = transfer.getValue().add(transfer.getFee());
+    public Transfer getTransfer() {
+        return new Transfer(this.originAccount, this.destinationAccount, this.value, this.requestedDate, this.scheduledDate);
     }
 }

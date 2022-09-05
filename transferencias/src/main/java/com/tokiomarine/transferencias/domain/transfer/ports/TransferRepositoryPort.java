@@ -1,12 +1,13 @@
 package com.tokiomarine.transferencias.domain.transfer.ports;
 
 import com.tokiomarine.transferencias.domain.transfer.Transfer;
-
-import java.util.List;
+import com.tokiomarine.transferencias.infrastructure.entities.TransferEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface TransferRepositoryPort {
 
-    List<Transfer> findAll();
+    Page<Transfer> findAll(Pageable page);
 
-    void save(Transfer transfer);
+    TransferEntity save(Transfer transfer);
 }

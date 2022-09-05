@@ -1,22 +1,22 @@
 package com.tokiomarine.transferencias.domain.transfer.dtos;
 
 import com.tokiomarine.transferencias.domain.transfer.Transfer;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class TransferRespondeBodyDTO {
-
+@Getter
+public class TransferResponseBodyDTO {
     private final String originAccount;
     private final String destinationAccount;
     private final BigDecimal value;
-    private BigDecimal fee;
     private final LocalDate requestedDate;
     private final LocalDate scheduledDate;
-
     private final BigDecimal finalValue;
+    private BigDecimal fee;
 
-    public TransferRespondeBodyDTO(Transfer transfer) {
+    public TransferResponseBodyDTO(Transfer transfer) {
         this.originAccount = transfer.getOriginAccount();
         this.destinationAccount = transfer.getDestinationAccount();
         this.value = transfer.getFee();

@@ -14,7 +14,7 @@ public class TransferTests {
     @Test
     void validateFeeOfTransferenciaTypeA() {
         LocalDate today = LocalDate.now();
-        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today,  today);
+        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today, today);
         Assertions.assertEquals(6L, transfer.getFee().longValue());
     }
 
@@ -23,7 +23,7 @@ public class TransferTests {
     void validateFeeOfTransferenciaTypeB() {
         LocalDate today = LocalDate.now();
         LocalDate futureDay = LocalDate.now().plusDays(5);
-        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today,  futureDay);
+        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today, futureDay);
         Assertions.assertEquals(12L, transfer.getFee().longValue());
     }
 
@@ -32,7 +32,7 @@ public class TransferTests {
     void validateFeeOfTransferenciaTypeCWithMoreThan10Days() {
         LocalDate today = LocalDate.now();
         LocalDate futureDay = LocalDate.now().plusDays(15);
-        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today,  futureDay);
+        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today, futureDay);
         Assertions.assertEquals(8.2, transfer.getFee().doubleValue());
     }
 
@@ -41,7 +41,7 @@ public class TransferTests {
     void validateFeeOfTransferenciaTypeCWithMoreThan20Days() {
         LocalDate today = LocalDate.now();
         LocalDate futureDay = LocalDate.now().plusDays(25);
-        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today,  futureDay);
+        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today, futureDay);
         Assertions.assertEquals(6.9, transfer.getFee().doubleValue());
     }
 
@@ -50,7 +50,7 @@ public class TransferTests {
     void validateFeeOfTransferenciaTypeCWithMoreThan30Days() {
         LocalDate today = LocalDate.now();
         LocalDate futureDay = LocalDate.now().plusDays(35);
-        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today,  futureDay);
+        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today, futureDay);
         Assertions.assertEquals(4.7, transfer.getFee().doubleValue());
     }
 
@@ -59,7 +59,7 @@ public class TransferTests {
     void validateFeeOfTransferenciaTypeCWithMoreThan40Days() {
         LocalDate today = LocalDate.now();
         LocalDate futureDay = LocalDate.now().plusDays(45);
-        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today,  futureDay);
+        Transfer transfer = new Transfer("XXXXXX", "YYYYYY", new BigDecimal(100), today, futureDay);
         Assertions.assertEquals(1.7, transfer.getFee().doubleValue());
     }
 }

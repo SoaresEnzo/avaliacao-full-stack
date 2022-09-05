@@ -1,6 +1,8 @@
 package com.tokiomarine.transferencias.infrastructure.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -8,7 +10,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Data
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class TransferEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,4 +25,12 @@ public class TransferEntity {
     private LocalDate requestedDate;
     private LocalDate scheduledDate;
 
+    public TransferEntity(String originAccount, String destinationAccount, BigDecimal value, BigDecimal fee, LocalDate requestedDate, LocalDate scheduledDate) {
+        this.originAccount = originAccount;
+        this.destinationAccount = destinationAccount;
+        this.value = value;
+        this.fee = fee;
+        this.requestedDate = requestedDate;
+        this.scheduledDate = scheduledDate;
+    }
 }

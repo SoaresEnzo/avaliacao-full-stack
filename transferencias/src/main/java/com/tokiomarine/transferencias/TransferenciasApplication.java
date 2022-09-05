@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackageClasses = SpringTransferRepository.class)
 public class TransferenciasApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TransferenciasApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TransferenciasApplication.class, args);
+    }
 
 }
