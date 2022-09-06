@@ -15,6 +15,7 @@ import java.net.URI;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RequestMapping("transfer")
 public class TransferController {
 

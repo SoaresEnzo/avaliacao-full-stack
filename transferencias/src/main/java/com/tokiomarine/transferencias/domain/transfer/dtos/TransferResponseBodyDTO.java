@@ -19,7 +19,7 @@ public class TransferResponseBodyDTO {
     public TransferResponseBodyDTO(Transfer transfer) {
         this.originAccount = transfer.getOriginAccount();
         this.destinationAccount = transfer.getDestinationAccount();
-        this.value = transfer.getFee();
+        this.value = transfer.getValue();
         this.fee = transfer.getFee();
         this.requestedDate = transfer.getRequestedDate();
         this.scheduledDate = transfer.getScheduledDate();
