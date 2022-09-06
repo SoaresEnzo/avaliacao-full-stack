@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IPage } from '../models/pageable.model';
 import { ITransfer } from '../models/transfer.model';
 import { IScheduleTransferRequest } from '../models/scheduleTransfer.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class HttpService {
   })
   constructor(private http: HttpClient) { }
 
-  get(url: string) {
-    return this.http.get(url, {headers: this.headers});
+  get<T>(url: string):Observable<T> {
+    return this.http.get<T>(url, {headers: this.headers});
   }
 
   post(url: string, body: any) {

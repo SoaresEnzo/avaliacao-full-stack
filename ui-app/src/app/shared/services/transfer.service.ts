@@ -1,6 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { IPage } from "../models/pageable.model";
 import { IScheduleTransferRequest } from "../models/scheduleTransfer.model";
+import { ITransfer } from "../models/transfer.model";
 import { HttpService } from "./http.service";
 
 @Injectable({
@@ -11,8 +14,8 @@ export class TransferService {
     constructor(private httpClient: HttpService) {
     }
 
-    getAllTransfers(page: number, size:number) {
-        return this.httpClient.get(this.url);
+    getAllTransfersPaged(page: number, size:number): Observable<IPage<ITransfer>> {
+        return this.httpClient.get<IPage<ITransfer>>(this.url).pipe();
       }
 
     scheduleTransfer(req: IScheduleTransferRequest) {
