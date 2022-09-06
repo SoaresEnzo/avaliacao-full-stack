@@ -1,0 +1,8 @@
+header {
+    background-color: #ccc;
+    width: 100%;
+}
+
+.container-fluid {
+    min-height: 100vh;
+}
