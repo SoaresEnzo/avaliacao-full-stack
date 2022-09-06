@@ -1,15 +1,15 @@
 version: '3'
 
 services:
-  # backend-app:
-  #   container_name: transferencias-back
-  #   build:
-  #     context: ./transferencias
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8080:8080"
-  #   networks:
-  #     - appnet
+  backend-app:
+    container_name: transferencias-back
+    build:
+      context: ./transferencias
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - appnet
 
   ui:
     container_name: transferencias-front
