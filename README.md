@@ -18,7 +18,7 @@ Para isolar as regras de negócio e tornar a aplicação mais flexível e desaco
 ![arquitetura-hexagonal](https://user-images.githubusercontent.com/62313997/188759813-180f0f67-6137-4b8c-8b4d-ff02d4bc6da2.svg)
 
 
-$ Subida do projeto:
+# Subida do projeto:
 Passo 1:
 Instale o NodeJS em sua versão LTS.
 
