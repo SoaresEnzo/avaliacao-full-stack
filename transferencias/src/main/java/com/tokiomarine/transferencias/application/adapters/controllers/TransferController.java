@@ -48,7 +48,7 @@ public class TransferController {
     }
 
     @GetMapping("/fee")
-    public ResponseEntity<BigDecimal> getFeeValue (@RequestParam BigDecimal value, @RequestParam @DateTimeFormat(pattern = "dd-MM-uuuu") LocalDate scheduledDate) {
+    public ResponseEntity<BigDecimal> getFeeValue (@RequestParam BigDecimal value, @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate scheduledDate) {
         return ResponseEntity.ok().body(transferServicePort.calculateFee(value, scheduledDate));
     }
 }

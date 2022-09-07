@@ -15,7 +15,9 @@ export class PageComponent implements OnInit {
     origin: new FormControl("", [Validators.required]),
     destination: new FormControl("", [Validators.required]),
     value: new FormControl(0.00, [Validators.required]),
-    scheduledDate: new FormControl("", [Validators.required])
+    scheduledDate: new FormControl("", [Validators.required]),
+    fee: new FormControl(0.00),
+    total: new FormControl(0.00),
   })
   minDate = new Date();
   success = false;
@@ -57,4 +59,18 @@ export class PageComponent implements OnInit {
       this.failMessage = "Preencha todos os campos para agendar sua transferência"
     }
   }
+
+  calculateFee() {
+    const value = this.form!.get("value")!;
+    const date = this.form!.get("scheduledDate")!;
+    if(value.valid && date!.valid){
+      const scheduledDate = new Date(date!.value!);
+      const parsedScheduledDate = minTwoDigits(scheduledDate.getDate())+ '-' + minTwoDigits(scheduledDate.getMonth()+1) +'-'+ scheduledDate.getFullYear();
+      this.http.getFee(value!.value!, parsedScheduledDate ).subscribe(response =>{
+        this.form.get("fee")?.setValue(response);
+        this.form.get("total")?.setValue(response + value!.value!);
+      })
+    }
+  }
+
 }
