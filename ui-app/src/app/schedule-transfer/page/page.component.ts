@@ -14,7 +14,7 @@ export class PageComponent implements OnInit {
   form = new FormGroup({
     origin: new FormControl("", [Validators.required]),
     destination: new FormControl("", [Validators.required]),
-    value: new FormControl(0, [Validators.required]),
+    value: new FormControl(0.00, [Validators.required]),
     scheduledDate: new FormControl("", [Validators.required])
   })
   minDate = new Date();
@@ -30,6 +30,8 @@ export class PageComponent implements OnInit {
     if (this.form.valid) {
       const today = new Date();
       const parsedToday =  today.getFullYear()+ '-'+ minTwoDigits(today.getMonth()+1)  + '-' + minTwoDigits(today.getDate());
+
+      console.log(this.form.get("value")!.value,)
       const body: IScheduleTransferRequest = {
         originAccount: this.form.get("origin")!.value,
         destinationAccount: this.form.get("destination")!.value,

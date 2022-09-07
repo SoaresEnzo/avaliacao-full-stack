@@ -7,6 +7,7 @@ import { TransferService } from '../shared/services/transfer.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpService } from '../shared/services/http.service';
 import { ErrorCatchingInterceptor } from '../interceptors/error-catching.interceptor';
+import { MatPaginatorModule } from '@angular/material/paginator';
 const routes: Route[] = [{
   path: "",
   component: PageComponent
@@ -20,6 +21,7 @@ const routes: Route[] = [{
     CommonModule,
     RouterModule.forChild(routes),
     MatTableModule,
+    MatPaginatorModule,
     HttpClientModule
   ],
   providers: [

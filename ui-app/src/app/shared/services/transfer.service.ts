@@ -15,7 +15,7 @@ export class TransferService {
     }
 
     getAllTransfersPaged(page: number, size:number): Observable<IPage<ITransfer>> {
-        return this.httpClient.get<IPage<ITransfer>>(this.url).pipe();
+        return this.httpClient.get<IPage<ITransfer>>(this.url+`?page=${page}&size=${size}`).pipe();
       }
 
     scheduleTransfer(req: IScheduleTransferRequest) {
