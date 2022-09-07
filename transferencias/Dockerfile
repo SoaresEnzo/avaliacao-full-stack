@@ -3,4 +3,4 @@ WORKDIR /usr/src
 COPY ./ ./
 RUN mvn clean install
 EXPOSE 8080
-ENTRYPOINT ["java" ,"-jar" ,"transferencias-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java" ,"-jar" ,"target/transferencias-0.0.1-SNAPSHOT.jar"]
