@@ -4,8 +4,9 @@ import { PageComponent } from './page/page.component';
 import { Route, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table'
 import { TransferService } from '../shared/services/transfer.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpService } from '../shared/services/http.service';
+import { ErrorCatchingInterceptor } from '../interceptors/error-catching.interceptor';
 const routes: Route[] = [{
   path: "",
   component: PageComponent
@@ -25,7 +26,12 @@ const routes: Route[] = [{
     TransferService,
     HttpService,
     DatePipe,
-    CurrencyPipe
+    CurrencyPipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorCatchingInterceptor,
+      multi: true
+  }
   ]
 })
 export class ListTransfersModule { }

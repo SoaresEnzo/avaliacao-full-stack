@@ -10,8 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpService } from '../shared/services/http.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TransferService } from '../shared/services/transfer.service';
+import { ErrorCatchingInterceptor } from '../interceptors/error-catching.interceptor';
 const routes: Route[] = [{
   path: "",
   component: PageComponent
@@ -35,7 +36,12 @@ const routes: Route[] = [{
     RouterModule.forChild(routes)
   ], providers: [
     HttpService,
-    TransferService
+    TransferService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorCatchingInterceptor,
+      multi: true
+  }
   ]
 })
 export class ScheduleTransferModule { }

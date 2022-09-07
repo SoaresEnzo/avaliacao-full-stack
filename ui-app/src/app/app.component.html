@@ -7,4 +7,7 @@
 
     </header>
     <router-outlet></router-outlet>
+    <div class="alert alert-danger" role="alert" *ngIf="error.hasError">
+        Houve um erro no servidor, por favor aguarde.
+      </div>
 </div>
