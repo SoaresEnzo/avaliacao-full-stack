@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class ExceptionConfig extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({RuntimeException.class})
+    @ExceptionHandler({NoFeeAvaliableException.class})
     private ResponseEntity<ErrorDTO> handleNoFeeAvailable(Exception ex) {
         return ResponseEntity.badRequest().body(new ErrorDTO("400", ex.getMessage()));
     }

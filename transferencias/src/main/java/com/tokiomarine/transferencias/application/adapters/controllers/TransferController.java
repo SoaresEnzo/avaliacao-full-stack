@@ -7,11 +7,14 @@ import com.tokiomarine.transferencias.infrastructure.entities.TransferEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @RestController
@@ -42,5 +45,10 @@ public class TransferController {
     public ResponseEntity scheduleTransfer(@RequestBody TransferRequestBodyDTO body) {
         TransferEntity savedEntity = transferServicePort.saveTransfer(body);
         return ResponseEntity.created(getURI(savedEntity.getTransferId())).build();
+    }
+
+    @GetMapping("/fee")
+    public ResponseEntity<BigDecimal> getFeeValue (@RequestParam BigDecimal value, @RequestParam @DateTimeFormat(pattern = "dd-MM-uuuu") LocalDate scheduledDate) {
+        return ResponseEntity.ok().body(transferServicePort.calculateFee(value, scheduledDate));
     }
 }

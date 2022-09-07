@@ -23,7 +23,7 @@ public class Transfer {
         this.value = value;
         this.requestedDate = requestedDate;
         this.scheduledDate = scheduledDate;
-        calculateFee();
+        this.fee = Transfer.calculateFee(this.value, this.requestedDate, this.scheduledDate);
     }
 
     public Transfer(String originAccount, String destinationAccount, BigDecimal value, BigDecimal fee, LocalDate requestedDate, LocalDate scheduledDate) {
@@ -35,34 +35,37 @@ public class Transfer {
         this.scheduledDate = scheduledDate;
     }
 
-    private void calculateFee() {
-        long daysBetweenRequestAndSchedule = Duration.between(this.requestedDate.atStartOfDay(), this.scheduledDate.atStartOfDay()).toDays();
+    public static BigDecimal calculateFee(BigDecimal value, LocalDate requestedDate, LocalDate scheduledDate) {
+        BigDecimal fee = new BigDecimal("0");
+        long daysBetweenRequestAndSchedule = Duration.between(requestedDate.atStartOfDay(), scheduledDate.atStartOfDay()).toDays();
         if (daysBetweenRequestAndSchedule == 0) {
-            this.fee = new TypeAFee().calculateFee(this.value);
+            fee = new TypeAFee().calculateFee(value);
         }
 
         if (daysBetweenRequestAndSchedule > 0 && daysBetweenRequestAndSchedule <= 10) {
-            this.fee = new TypeBFee().calculateFee(this.value);
+            fee = new TypeBFee().calculateFee(value);
         }
 
         if (daysBetweenRequestAndSchedule > 10 && daysBetweenRequestAndSchedule <= 20) {
-            this.fee = new TypeCFeeGreaterThan10Days().calculateFee(this.value);
+            fee = new TypeCFeeGreaterThan10Days().calculateFee(value);
         }
 
         if (daysBetweenRequestAndSchedule > 20 && daysBetweenRequestAndSchedule <= 30) {
-            this.fee = new TypeCFeeGreaterThan20Days().calculateFee(this.value);
+            fee = new TypeCFeeGreaterThan20Days().calculateFee(value);
         }
 
         if (daysBetweenRequestAndSchedule > 30 && daysBetweenRequestAndSchedule <= 40) {
-            this.fee = new TypeCFeeGreaterThan30Days().calculateFee(this.value);
+            fee = new TypeCFeeGreaterThan30Days().calculateFee(value);
         }
 
         if (daysBetweenRequestAndSchedule > 40) {
-            this.fee = new TypeCFeeGreaterThan40Days().calculateFee(this.value);
+             fee= new TypeCFeeGreaterThan40Days().calculateFee(value);
         }
 
-        if (this.fee == null) {
+        if (fee.doubleValue() == 0) {
             throw new NoFeeAvaliableException("Não existe taxa aplicável.");
         }
+
+        return fee;
     }
 }
